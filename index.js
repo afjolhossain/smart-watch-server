@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 var cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const e = require("express");
 var ObjectId = require("mongodb").ObjectId;
 require("dotenv").config();
 const port = process.env.PORT || 5000;
@@ -26,10 +27,14 @@ async function run() {
     const orderCollection = client.db("watchServices").collection("orders");
 
     app.get("/services", async (req, res) => {
-      const query = {};
-      const cursor = servicesCollection.find(query);
-      const services = await cursor.toArray();
-      return res.send(services);
+      try {
+        const query = {};
+        const cursor = servicesCollection.find(query);
+        const services = await cursor.toArray();
+        return res.send(services);
+      } catch {
+        res.status(500).json({ message: e.message });
+      }
     });
 
     app.get("/services/:id", async (req, res) => {
