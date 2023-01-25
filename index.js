@@ -25,17 +25,11 @@ async function run() {
       .collection("services");
     const orderCollection = client.db("watchServices").collection("orders");
 
-    app.post("/services", async (req, res) => {
-      const services = req.body;
-      const result = await servicesCollection.insertOne(services);
-      res.send(result);
-    });
-
     app.get("/services", async (req, res) => {
       const query = {};
       const cursor = servicesCollection.find(query);
       const services = await cursor.toArray();
-      res.send(services);
+      return res.send(services);
     });
 
     app.get("/services/:id", async (req, res) => {
@@ -44,6 +38,13 @@ async function run() {
       const service = await servicesCollection.findOne(query);
       res.send(service);
     });
+
+    app.post("/services", async (req, res) => {
+      const services = req.body;
+      const result = await servicesCollection.insertOne(services);
+      res.send(result);
+    });
+
     // orders API
     app.post("/orders", async (req, res) => {
       const order = req.body;
