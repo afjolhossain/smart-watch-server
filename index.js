@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 var cors = require("cors");
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const e = require("express");
 var ObjectId = require("mongodb").ObjectId;
 require("dotenv").config();
 const port = process.env.PORT || 5000;
@@ -82,7 +81,7 @@ async function run() {
   } finally {
   }
 }
-run().catch(console.time());
+run().catch(console.log);
 
 app.get("/", async (req, res) => {
   res.send("Watch portal server is running");
