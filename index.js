@@ -27,14 +27,15 @@ async function run() {
     const orderCollection = client.db("watchServices").collection("orders");
 
     app.get("/services", async (req, res) => {
-      try {
-        const query = {};
-        const cursor = servicesCollection.find(query);
-        const services = await cursor.toArray();
-        return res.send(services);
-      } catch {
-        res.status(500).json({ message: e.message });
-      }
+      // try {
+
+      // } catch {
+      //   res.status(500).json({ message: e.message });
+      // }
+      const query = {};
+      const cursor = servicesCollection.find(query);
+      const services = await cursor.toArray();
+      return res.send(services);
     });
 
     app.get("/services/:id", async (req, res) => {
