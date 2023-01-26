@@ -82,7 +82,7 @@ async function run() {
   } finally {
   }
 }
-run().catch(console.dir);
+run().catch(console.time());
 
 app.get("/", async (req, res) => {
   res.send("Watch portal server is running");
